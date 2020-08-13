@@ -1,3 +1,22 @@
+html, body {width:100%; overflow-x:hidden;}
+
 body{
-    height:100vh;
+    margin: 0;
+    padding:0;
+    background:#f1f1f1 !important;
+}
+
+.react-multi-carousel-item{
+    padding:10px;
+}
+ul li:before {
+content: ' ' !important;
+}
+.react-multi-carousel-list{
+  align-items:baseline !important;
+}
+.algolia-places input {
+  background:#fff !important;
+  border-radius:2px !important;
+  border: 1px solid #d9d9d9 !important;
 }
