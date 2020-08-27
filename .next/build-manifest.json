@@ -9,7 +9,7 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
+    "/[categoria]/[id]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
@@ -24,11 +24,7 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/checkout": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/index": [
+    "/ingresar": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

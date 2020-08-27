@@ -28,6 +28,11 @@ const Header = () => {
             {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> */}
             <link rel="stylesheet" type="text/css" href="/nprogress.css" />
             <link href="https://fonts.googleapis.com/css?family=Karla:400,700,700i&display=swap" rel="stylesheet"></link>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+            <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
       
         </Head>
         <HeaderWrapper>

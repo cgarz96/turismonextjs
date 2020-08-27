@@ -7,14 +7,15 @@ import Loader from 'react-loader-spinner'
 import styled from 'styled-components'
 
     export const AddButtonWrapper = styled.button`
-    background: ${props => props.inCart == true ? "none" : '#fea621'};
+    background: ${props => props.inCart == true ? "none" : 'rgb(150,41,43)'};
     border: ${props => props.inCart == true ? "1px solid #fea621" : 'none'};
-    width:190px;
+   width:155px;
     height:40px;
-    border-radius:5px;
-    display:grid;
-    align-items:center;
-    position:relative;
+    border-radius:20px;
+    
+    
+  
+    
     cursor: pointer;
     `;
     export const FalseBtnWrapper = styled.button`
@@ -30,12 +31,12 @@ import styled from 'styled-components'
     `;
 
     export const AddTitle = styled.p`
-      color: #0b121a;
+      color: white;
       font-weight:900;
       font-size:14px;
       display:grid;
-      padding: 0px 0px 0px 14px;
-      width:180px;
+      padding: -5px 10px 9px 6px;
+     
       grid-template-columns: 0px 160px;
       align-items:center;
       font-family:'Karla',sans-serif;
@@ -133,7 +134,7 @@ const AddButton = ({idproducto}) => {
                     height={20}
                     width={20}
                 />
-                ): (inCart ? <RemoveTitle> <TiMinus  size="16px" color="#fea621"/> Remover producto</RemoveTitle> : <AddTitle> <TiPlus size="16px" color="black"/> Agregar producto</AddTitle>)
+                ): (inCart ? <RemoveTitle> <TiMinus  size="16px" color="#fea621"/> Remover producto</RemoveTitle> : <AddTitle> <TiPlus size="16px" color="white"/> Agregar producto</AddTitle>)
                 }
             </AddButtonWrapper>
         )

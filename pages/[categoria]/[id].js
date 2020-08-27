@@ -5,6 +5,9 @@ import {useRouter} from 'next/router'
 import Loader from 'react-loader-spinner'
 import useSWR, { mutate } from 'swr'
 import AddButton from '../../components/AddButton'
+
+import CarouselOffers from '../../components/CarouselOffers'
+import { Carousel } from 'antd';
  
 const Paquete = ({data}) => {
 
@@ -45,25 +48,62 @@ const Paquete = ({data}) => {
         <MainWrapper>
             <Layout>
                 <Content>
-                  {data.length > 0 ? (
+                  {console.log(data)}
+                  {data.paquete.length > 0 ? (
                     <>
-                    <PortadaPaquete src="/viñedo.jpg"/>
-                    <h1> {data[0].producto_localidad} </h1>
-                    <p>{data[0].descripcion_ampliada}</p>
-                    <p>{data[0].descripcion_detallada}</p>
-                    <img src={`https://www.lrseguridad.com.ar/turismo/1.0/${data[0].path}`}/>
-                    <p>{data[0].empresa_servicio_domicilo}</p>
-                    <p>{data[0].empresa_servicio_email}</p>
-                    <p>desde:{data[0].fecha_desde}</p>
-                    <p>hasta:{data[0].fecha_hasta}</p>
-                    <p>Estado:{data[0].paqueteturistico_estado}</p>
-                    <p>Precio:{data[0].precio}</p>
-                    <p>Tipo:{data[0].tipo_producto}</p>
-                   {!userdata.data ? (
+                    <PortadaPaquete src="/movete.gif"/>
+                    <CardProduct>
+                    <TitleProduct>{data.paquete[0].descripcion_ampliada}</TitleProduct>
+                    <MainProduct>
+                    <DetailProduct>
+                    <DetailsTitle>Detalles</DetailsTitle>
+                    <Details>Desde: {data.paquete[0].fecha_desde}</Details>
+                    <Details>Hasta: {data.paquete[0].fecha_hasta}</Details>
+                    <Details>Precio: ${data.paquete[0].precio}</Details>
+                    
+
+                    </DetailProduct>
+                    <div className="fotorama" data-width="400" data-height="400">
+                    { data.paths.map(item => (  
+                    <PathsProduct src={`https://www.lrseguridad.com.ar/turismo/1.0/${item.path} `}>
+                    </PathsProduct> ))}
+                    </div> 
+                    </MainProduct>
+                    <TableDetails>
+                    <TableHead>Tipo de producto</TableHead>
+                    <TableHead>Localidad</TableHead>
+                    <TableHead>Estado</TableHead>
+                    <TableHead>Empresa</TableHead>
+                    <TableHead>Correo</TableHead>
+                    <TableBody>{data.paquete[0].tipo_producto}</TableBody>
+                    <TableBody>{data.paquete[0].producto_localidad} </TableBody>
+                    <TableBody>{data.paquete[0].paqueteturistico_estado}</TableBody>
+                    <TableBody>{data.paquete[0].empresa_servicio_domicilo}</TableBody>
+                    <TableBody>{data.paquete[0].empresa_servicio_email}</TableBody>
+
+    
+
+                    </TableDetails>
+                    <Description>
+                    <DetailsTitle>Descripcion detallada</DetailsTitle>
+                    <p>{data.paquete[0].descripcion_detallada}</p>
+                    </Description>
+                    <FooterProduct>
+                       {!userdata.data ? (
                      ''
                    ): userdata.data.auth ? userdata.data.auth.token ? (
-                     <AddButton idproducto={data[0].id_producto}/>
-                   ) : '' : ''}
+                    <AddButton idproducto={data.paquete[0].id_producto}/>
+                      ) : '' : ''}
+                      <div style={{paddingLeft:'70%'}}>     <ContactButton>Contactar</ContactButton></div>
+                    </FooterProduct>
+                    </CardProduct>
+
+                    <CarouselOffers offers={data}/>
+                    <h1> </h1>
+
+                  
+                     
+                   
                     </>
                   ): (
                     <h1> No se encontraron resultados para este paquete.</h1>
@@ -98,8 +138,10 @@ export async function getStaticPaths() {
 }
 
 
+
+
 export async function getStaticProps({ params }) {
-const res = await fetch(`https://www.lrseguridad.com.ar/turismorest/public/api/paquetepublicos/${params.id}`, {
+const res = await fetch(`https://www.lrseguridad.com.ar/turismorest/public/api/paquetes-publicos/${params.id}`, {
     headers: {
       'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -138,4 +180,98 @@ export const Content = styled.div`
 export const ContentLoad = styled.div`
   position:relative;
   min-height:70vh;
+`;
+
+export const CardProduct = styled.div`
+  width: 100%;
+  padding: 20px 10px 20px 10px;
+  background-color: #e6e6e6;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 20px;
+  grid-gap: 5px; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+`;
+
+export const TitleProduct = styled.h3`
+background: rgb(226, 48, 48);
+border-radius: 8px;
+color: white; 
+padding-left:5px;
+
+
+`;
+
+
+export const MainProduct = styled.div`
+display: grid;
+grid-template-columns: 2fr 1fr; 
+`;
+export const PathsProduct = styled.img`
+@media only screen and (max-width: 600px) {
+  
+    grid-column: 1/-1;
+  
+}
+`;
+
+export const DetailProduct = styled.div`
+
+`;
+
+export const DetailsTitle = styled.h4`
+color: rgb(97, 97, 97);
+`;
+
+export const Details = styled.h4`
+color: rgb(226, 48, 48);
+
+`;
+
+export const TableDetails = styled.div`
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-gap: 3px;
+background-color: white;
+border-radius: 5px;
+border-top: 10px solid red;
+`;
+
+export const TableHead = styled.div`
+background-color: rgb(223, 222, 223);
+padding:5px;
+`;
+
+export const TableBody = styled.div`
+
+`;
+
+export const Description = styled.div`
+display:grid;
+grid-template-columns: 1fr;
+background:white;
+`;
+
+export const FooterProduct = styled.div`
+display:grid;
+grid-template-columns: 3fr 1fr;
+@media only screen and (max-width: 600px) {
+  grid-template-columns: 1fr;
+  grid-column: 1/-1;
+  padding-left: 0%;
+
+}
+`;
+
+export const ContactButton = styled.button`
+border:0px; border-radius: 20px; background-color: rgb(226, 48, 48); color: white;padding:10px;
+@media only screen and (max-width: 600px) {
+  
+  grid-column: 1/-1;
+  padding-left: 0%;
+  width: 100%;
+  background:blue;
+
+}
 `;
